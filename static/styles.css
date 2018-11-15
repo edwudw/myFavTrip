@@ -1,0 +1,62 @@
+form {
+    width: 400px;
+    margin: 50px auto;
+}
+
+#searchDiv {
+    display: inline-block;
+    margin: auto;
+}
+
+#searchButton {
+    display: inline-block;
+}
+
+#searchForm {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+}
+
+#waratah {
+    display: block;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+h3 {
+    text-align: center;
+}
+
+#searchResultTable {
+
+    margin: 0 3%;
+    float: left;
+}
+
+#locations {
+    float: right;
+    margin-bottom: 200px;
+    margin-right: 1%;
+}
+
+.locationButton {
+    margin-left: 5px;
+}
+
+#datePicker {
+    margin-top: 15px;
+}
+
+#tripForm { 
+    margin-top: 30px;
+}
+
+.collapse-row.collapsed + tr{
+    display: none;
+}
+
