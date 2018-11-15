@@ -31,6 +31,13 @@ class Trip():
         self._routes = routes
         self._legs = legs
         self.checkLines()
+
+    @property
+    def origin(self):
+        return self._origin
+    @property
+    def destination(self):
+        return self._destination
     @property
     def minutes(self):
         return self._minutes

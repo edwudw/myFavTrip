@@ -42,6 +42,28 @@ def getStop(searchTerm):
     # print(data[dictToReturn])
     return data[dictToReturn]
 
+def getStopName(stopID):
+    dictToReturn = 'locations'  # If this changes in the future, change this variable
+    api_key = "Y2c69i8Cmf6QA5g838QzNSXPzbGEYssJDySK"
+
+    base_url = "https://api.transport.nsw.gov.au/v1/tp/stop_finder"
+
+    headers = {"Authorization": "apikey " + api_key}
+
+    payload = {"outputFormat": "rapidJSON", \
+            "type_sf": "stop", \
+            "name_sf": stopID, \
+			"coordOutputFormat": "EPSG:4326", \
+            "TfNSWSF": "true",\
+			"version": "10.2.1.42"}
+
+    response = requests.get(base_url, headers=headers, stream=True, params=payload)
+    # print("response code: " + str(response.status_code))
+    data = json.loads(response.content)
+    
+    # print(data[dictToReturn])
+    return data[dictToReturn][0]["name"]
+
 def getLegInfo(legs): # Gets info from legs array and puts it into a new array for easier read/write
     simpleLegs = []
 
@@ -57,7 +79,9 @@ def getLegInfo(legs): # Gets info from legs array and puts it into a new array f
             leg["origin"]['departureTimePlanned'], "%Y-%m-%dT%H:%M:%SZ")
         destTime = datetime.strptime(
             leg["destination"]['arrivalTimePlanned'], "%Y-%m-%dT%H:%M:%SZ")
-        
+            
+        originTime = datetime_from_utc_to_local(originTime)
+        destTime = datetime_from_utc_to_local(destTime)
         simpleLeg["originTime"] = str(originTime)
         simpleLeg["destTime"] = str(destTime)
         print("%s: %d" % (simpleLeg["origin"], index))
@@ -143,7 +167,9 @@ def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest):
         # def __init__(self, minutes, depart, arrive, transportTypes, routes):
 
         # Load data into trip object/class
-        trip = Trip(stopSrc, stopDest, minutes, depart, arrive, summary, routes, getLegInfo(legs))
+        origin = getStopName(stopSrc)
+        dest = getStopName(stopDest)
+        trip = Trip(origin, dest, minutes, depart, arrive, summary, routes, getLegInfo(legs))
         trips.append(trip)
     return trips
 
@@ -153,5 +179,6 @@ def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest):
 
 if __name__ == '__main__':
     # getStop("Rouse Hill Town Centre")
-    getTrip("dep", "20181111", "2000", "10131333", "10101229")
+    # getTrip("dep", "20181111", "2000", "10131333", "10101229")
+    print(getStopName("10104007"))
     

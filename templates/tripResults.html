@@ -43,51 +43,31 @@
                 <th scope="col">Depart</th>
                 <th scope="col">Arrive</th>
                 <th scope="col">Routes</th>
+                <th scope="col">Locations</th>
                 <th scope="col"></th>
             </thead>
             <tbody>
                 {% for trip in trips %}
-                <tr data-toggle="collapse" data-target=".hidden{{loop.index}}" class="collapse-row collapsed clickable">
+                <tr>
                     <th scope="row">{{ loop.index }}</th>
-                    <td>{{ trip.depart }} </td>
-                    <td>{{ trip.arrive }} </td>
-                    <td>{{ trip.stringRoutes() }} </td>
+                    <td><strong>{{ trip.depart }}</strong> </td>
+                    <td><strong>{{ trip.arrive }}</strong> </td>
+                    <td><strong>{{ trip.stringRoutes() }}</strong> </td>
+                    <td><strong>{{ trip.origin + " -> " + trip.destination }}</strong></td>
                     <td><input class="expandButton" type="image" src="static/expand.png"></td>
                 </tr>
                 {% for leg in trip.legs %}
                 <tr>
-                    <td class="hiddenRow">
-                        <div class="collapse hidden{{loop.index}}">
-                            {{ loop.index }}
-                        </div>
-                    </td>
-                    <td class="hiddenRow">
-                        <div class="collapse hidden{{loop.index}}">
-                            {{ leg["originTime"] }}
-                        </div>
-                    </td>
-                    <td class="hiddenRow">
-                        <div class="collapse hidden{{loop.index}}">
-                            {{ leg["destTime"] }}
-                        </div>
-                    </td>
-                    <td class="hiddenRow">
-                        <div class="collapse hidden{{loop.index}}">
-                            {{ leg["route"] }}
-                        </div>
-                    </td>
-                    <td class="hiddenRow">
-                        <div class="collapse hidden{{loop.index}}">
-                            {{ leg["origin"] }}
-                        </div>
-                    </td>
-                    <td class="hiddenRow">
-                        <div class="collapse hidden{{loop.index}}">
-                            {{ leg["destination"] }}
-                        </div>
-                    </td>
+                    <th class="index" scope="row">{{ loop.index }}</th>
+                    <td>{{ leg["originTime"] }}</td>
+                    <td>{{ leg["destTime"] }} </td>
+                    <td>{{ leg["route"] }} </td>
+                    <td>{{ leg["origin"] + " -> " + leg["destination"] }} </td>
+
                 </tr>
+
                 {% endfor %}
+                
                 {% endfor %}
             </tbody>
         </table>
