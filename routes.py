@@ -21,6 +21,15 @@ def tripFinder():
         time = request.form['timeBox'].replace(':', '')
         departStop = getStop(request.form['departBox'])
         arriveStop = getStop(request.form['arriveBox'])
-        trips = getTrip(request.form['depArrRadio'], date, time, departStop[0]['id'], arriveStop[0]['id'])
-        return render_template("tripResults.html", src=getStopName(request.form['departBox']), dest=getStopName(request.form['arriveBox']), trips=trips)
+        stopSrcName = getStopName(departStop[0]['id'])
+        stopDestName = getStopName(arriveStop[0]['id'])
+        trips = getTrip(request.form['depArrRadio'], date, time, departStop[0]['id'], arriveStop[0]['id'],
+                        stopSrcName, stopDestName)
+        return render_template("tripResults.html", src=stopSrcName, dest=stopDestName, trips=trips)
     return render_template('trip.html')
+
+@app.route("/favourites", methods=['GET', 'POST'])
+def favourites():
+    # if request.method == 'POST':
+    
+    return render_template("favourites.html")

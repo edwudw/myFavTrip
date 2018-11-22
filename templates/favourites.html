@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='favourites.js') }} "></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>NSW Transport | Favourites</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">NSW Transport</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stopFinder">Stop Finder </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tripFinder">Trip Finder</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/favourites">Favourites</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <table id="mainTable" class="table">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Depart Location</th>
+            <th scope="col">Arrive Location</th>
+            <th scope="col">Set Depart/Arrive Time</th>
+            <th scope="col">Depart Now</th>
+        </thead>
+        <tbody class="tbodyTable">
+            <tr>
+                <th scope="row">Thing</th>
+                <td>Test</td>
+                <td>Test2</td>
+                <td>Test3</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</body>
+</html>

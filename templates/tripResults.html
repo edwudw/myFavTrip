@@ -30,12 +30,18 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/tripFinder">Trip Finder</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/favourites">Favourites</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <h1>Trip Finder</h1>
-    <h3>From {{src}} To {{dest}}</h3>
+
+    <label class="hidden" id="src">{{src}}</label>
+    <label class="hidden" id="dest">{{dest}}</label>
+    <h3 id="headerLocations">From {{src}} To {{dest}}</h3>
     <div id="tripResultTable">
         <table class="table">
             <thead>

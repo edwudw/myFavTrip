@@ -93,7 +93,7 @@ def getLegInfo(legs): # Gets info from legs array and puts it into a new array f
 # itdTime = 1200
 # stopSrc = Rouse Hill Town Centre
 # stopDest = Parramatta
-def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest):
+def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest, stopNameSrc, stopNameDest):
     api_key = "Y2c69i8Cmf6QA5g838QzNSXPzbGEYssJDySK"
 
     base_url = "https://api.transport.nsw.gov.au/v1/tp/trip"
@@ -167,8 +167,8 @@ def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest):
         # def __init__(self, minutes, depart, arrive, transportTypes, routes):
 
         # Load data into trip object/class
-        origin = getStopName(stopSrc)
-        dest = getStopName(stopDest)
+        origin = stopNameSrc
+        dest = stopNameDest
         trip = Trip(origin, dest, minutes, depart, arrive, summary, routes, getLegInfo(legs))
         trips.append(trip)
     return trips

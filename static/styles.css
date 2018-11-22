@@ -59,3 +59,12 @@ h3 {
 .index {
     font-weight: normal;
 }
+
+.hidden {
+    display: none;
+}
+
+#mainTable {
+    width: 800px;
+    margin: 50px auto;
+}
