@@ -33,3 +33,7 @@ def favourites():
     # if request.method == 'POST':
     
     return render_template("favourites.html")
+
+# @app.route("/getStopID", methods=['POST'])
+# def getStopID():
+#     print("data received: " + request.get_data())

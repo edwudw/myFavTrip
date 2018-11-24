@@ -37,7 +37,7 @@
     </nav>
 
     <h1>Trip Finder</h1>
-    <form method="POST" id="tripForm">
+    <form method="POST" id="tripForm" onsubmit="submitForm();">
         <!-- Depart/Arrive Stop Input Boxes -->
         <div class="form-group" id="departDiv">
             <input type="text" class="form-control" id="departBox" name="departBox" placeholder="Depart Stop ID" value="{{ departTerm }}">
@@ -71,6 +71,14 @@
             <label>Enter Time:</label>
             <input type="time" class="form-control" id="timeBox" name="timeBox" placeholder="Time" value={{timeValue}}>
         </div>
+
+        <!-- Add To Favourites -->
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="favourites">
+            <label class="form-check-label" for="favourites">
+              Add To Favourites
+            </label>
+          </div>
 
         <button id="tripButton" type="submit" class="btn btn-primary">Go!</button>
     </form>

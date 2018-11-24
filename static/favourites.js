@@ -11,14 +11,55 @@ $(document).ready(function () {
 //    arrayStr.push(location);
 //    console.log(JSON.stringify(arrayStr));
 //    setCookie("locations", JSON.stringify(arrayStr)); 
-    console.log("hi");
-    var arrayOfLocations = getCookie("locations");
+    var arrayOfLocations = localStorage.getItem("locations");
     var arrayObject = JSON.parse(arrayOfLocations);
     for (var i = 0; i < arrayObject.length; i++) {
-        $(".tbodyTable").append("<tr> <th scope='col'>" + i + "</th> <td>" + arrayObject[i].begin + "</td> <td>" + arrayObject[i].end + "</td> <td>Button1</td> <td>Button2</td> </tr>");
+        $(".tbodyTable").append("<tr> <th scope='col'>" + i + "</th> <td id='begin'>" 
+        + arrayObject[i].begin + "</td> <td id='end'>" + arrayObject[i].end + 
+        "</td> <td><button type='button'\
+         class='btn btn-success tripSetDepart'>Get Trip</button></td> \
+         <td><button type='button' class='btn btn-success tripDepartNow'>Get Trip departing now</button></td> \
+         <td><button type='button' class='btn btn-danger deleteButton'>Delete</button></td></tr>");
         
     }
-}); 
+    $(".tripSetDepart").click(function () {
+        var begin = $(this).parent().parent().children("#begin").text();
+        var end = $(this).parent().parent().children("#end").text();
+        setCookie("startLoc", begin);
+        setCookie("endLoc", end);
+        document.location.href = '/tripFinder';
+    });
+
+    $(".tripDepartNow").click(function () {
+        var begin = $(this).parent().parent().children("#begin").text();
+        var end = $(this).parent().parent().children("#end").text();
+        setCookie("startLoc", begin);
+        setCookie("endLoc", end);
+        setCookie("departNow", "1");
+        document.location.href = '/tripFinder';
+    });
+
+    $(".deleteButton").click(function () {
+        var parent = $(this).parent().parent();
+        var begin = parent.children("#begin").text();
+        var end = parent.children("#end").text();
+
+        var arrayOfLocations = localStorage.getItem("locations");
+        var arrayObject = JSON.parse(arrayOfLocations);
+        var newArray = [];
+        for (var i = 0; i < arrayObject.length; i++) {
+            if (arrayObject[i]["begin"] != begin || arrayObject[i]["end"] != end) {
+                newArray.push(arrayObject[i]);
+            }
+        }
+        localStorage.setItem("locations", JSON.stringify(newArray));
+
+        parent.remove();
+
+    });
+
+});
+
 
 function setCookie(name, value, days) {
     var expires = "";

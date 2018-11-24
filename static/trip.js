@@ -4,13 +4,46 @@ $(document).ready(function () {
     var startLoc = getCookie("startLoc");
     if (startLoc != null) {
         $("#departBox").val(startLoc);
+        setCookie("startLoc", null);
     }
     var endLoc = getCookie("endLoc");
     if (endLoc != null) {
         $("#arriveBox").val(endLoc);
+        setCookie("endLoc", null);
+
     }
 
+    if (getCookie("departNow") == 1) {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        var date = yyyy + '-' + mm + '-' + dd;
+        $("#dateBox").val(date);
+        var hh = today.getHours();
+        var MM = today.getMinutes();
+        var time = hh + ':' + MM;
+        $("#timeBox").val(time);
+        setCookie("departNow", "0");
+    }
+
+
+
 });
+
+function submitForm() {
+    var location = {"begin": $("#departBox").val(), "end": $("#arriveBox").val()};
+    var arrayOfLocations = localStorage.getItem("locations");
+    var arrayStr = JSON.parse(arrayOfLocations);
+    if (arrayStr == null) {
+        arrayStr = [];
+    }
+    arrayStr.push(location);
+    localStorage.setItem("locations", JSON.stringify(arrayStr)); 
+}
 
 function setCookie(name, value, days) {
     var expires = "";
