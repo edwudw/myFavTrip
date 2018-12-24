@@ -34,8 +34,33 @@ $(document).ready(function () {
 
 });
 
+function getStopName(name) {
+    var returnValue = "";
+    $.ajax({
+        type : 'POST',
+        url : "/getStopID",
+        data : name,
+        async: false,
+        success: function(data) {
+            returnValue = data;
+            console.log(returnValue);
+        }
+    });
+    return returnValue;
+}
+
 function submitForm() {
-    var location = {"begin": $("#departBox").val(), "end": $("#arriveBox").val()};
+    
+    var name = getCookie("fromStopFinder");
+    if (name == null) {
+        name = "False";
+    }
+    if (name == "True") {
+        var location = {"begin": $("#departBox").val(), "end": $("#arriveBox").val(), "getName": name,
+                        "beginName": getStopName($("#departBox").val()), "endName": getStopName($("#arriveBox").val()) };
+    }
+    var location = {"begin": $("#departBox").val(), "end": $("#arriveBox").val(), "getName": name};
+    setCookie("fromStopFinder", "False");
     var arrayOfLocations = localStorage.getItem("locations");
     var arrayStr = JSON.parse(arrayOfLocations);
     if (arrayStr == null) {
@@ -43,6 +68,7 @@ function submitForm() {
     }
     arrayStr.push(location);
     localStorage.setItem("locations", JSON.stringify(arrayStr)); 
+
 }
 
 function setCookie(name, value, days) {

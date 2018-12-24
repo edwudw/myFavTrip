@@ -29,7 +29,7 @@ def getStop(searchTerm):
     headers = {"Authorization": "apikey " + api_key}
 
     payload = {"outputFormat": "rapidJSON", \
-            "type_sf": "stop", \
+            "type_sf": "any", \
             "name_sf": searchTerm, \
 			"coordOutputFormat": "EPSG:4326", \
             "TfNSWSF": "true",\
@@ -51,7 +51,7 @@ def getStopName(stopID):
     headers = {"Authorization": "apikey " + api_key}
 
     payload = {"outputFormat": "rapidJSON", \
-            "type_sf": "stop", \
+            "type_sf": "any", \
             "name_sf": stopID, \
 			"coordOutputFormat": "EPSG:4326", \
             "TfNSWSF": "true",\
@@ -117,7 +117,7 @@ def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest, stopNameSrc, stopN
     data = json.loads(response.content)
 
     # Get response from server
-
+    # print(data)
     journeys = data['journeys'] # Get journeys part of data
     writeJSONToFile(journeys) # For debugging
     trips = [] # Array of trip objects
@@ -178,7 +178,8 @@ def getTrip(depArrMacro, itdDate, itdTime, stopSrc, stopDest, stopNameSrc, stopN
 
 
 if __name__ == '__main__':
-    # getStop("Rouse Hill Town Centre")
-    # getTrip("dep", "20181111", "2000", "10131333", "10101229")
-    print(getStopName("10104007"))
+    # print(getStop("Rouse Hill Town Centre"))
+    print(getTrip("dep", "20181126", "2000", "poiID:34397:95307020:-1:Reading Cinemas Rouse Hill Town Centre:Rouse Hill:Reading Cinemas Rouse Hill Town Centre:ANY:POI:4863767:3734706:GDAV:nsw",
+     "10101229", "Test 1", "Test 2"))
+    print(getStopName("10101229"))
     

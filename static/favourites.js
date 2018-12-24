@@ -13,12 +13,14 @@ $(document).ready(function () {
 //    setCookie("locations", JSON.stringify(arrayStr)); 
     var arrayOfLocations = localStorage.getItem("locations");
     var arrayObject = JSON.parse(arrayOfLocations);
-    for (var i = 0; i < arrayObject.length; i++) {
+
+    for (var i = 1; i <= arrayObject.length; i++) {
         $(".tbodyTable").append("<tr> <th scope='col'>" + i + "</th> <td id='begin'>" 
         + arrayObject[i].begin + "</td> <td id='end'>" + arrayObject[i].end + 
         "</td> <td><button type='button'\
          class='btn btn-success tripSetDepart'>Get Trip</button></td> \
          <td><button type='button' class='btn btn-success tripDepartNow'>Get Trip departing now</button></td> \
+         <td>" + arrayObject[i].getName + "</td> \
          <td><button type='button' class='btn btn-danger deleteButton'>Delete</button></td></tr>");
         
     }

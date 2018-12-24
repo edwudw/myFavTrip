@@ -43,6 +43,7 @@ $(document).ready(function () {
 });
 
 function tripFinderButton() {
+    setCookie("fromStopFinder", "True");
     var labelText = $("#startLoc").text()
     var startID = labelText.slice(labelText.indexOf(": ") + 2);
     console.log(startID);
