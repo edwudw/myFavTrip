@@ -1,6 +1,6 @@
 import sys, requests, json, time
 from datetime import datetime
-from trip import Trip
+from app.trip import Trip
 
 
 def datetime_from_utc_to_local(utc_datetime):

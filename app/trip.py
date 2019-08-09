@@ -1,7 +1,7 @@
 class Trip():
     # This code was added because of a suggestion by Roshan Sriram
     def checkForRichmondLine(self):
-        with open("static/richmondLine.txt", "r") as r:
+        with open("app/static/richmondLine.txt", "r") as r:
             stations = r.readlines()
         stations = [x.strip() for x in stations]
         if self._origin in stations or self._destination in stations:
@@ -9,7 +9,7 @@ class Trip():
                 if route.find("T1 North Shore, Northern & Western Line") != -1:
                     self._routes[index] = "T1 Richmond Line"
     def checkForPenrithLine(self):
-        with open("static/penrithLine.txt", "r") as r:
+        with open("app/static/penrithLine.txt", "r") as r:
             stations = r.readlines()
         stations = [x.strip() for x in stations]
         if self._origin in stations or self._destination in stations:

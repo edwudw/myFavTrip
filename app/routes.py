@@ -1,6 +1,6 @@
 from flask import request, render_template, redirect, url_for
-from server import app
-from stopFinder import getStop, getTrip, getStopName
+from app import app
+from app.stopFinder import getStop, getTrip, getStopName
 
 @app.route('/', methods=['GET','POST'])
 def index():
