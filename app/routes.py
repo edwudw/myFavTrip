@@ -2,18 +2,20 @@ from flask import request, render_template, redirect, url_for
 from app import app
 from app.stopFinder import getStop, getTrip, getStopName
 
-@app.route('/', methods=['GET','POST'])
+mainRoute = ''
+
+@app.route(mainRoute + '/', methods=['GET','POST'])
 def index():
     return render_template('base.html')
 
-@app.route('/stopFinder', methods=['GET','POST'])
+@app.route(mainRoute + '/stopFinder', methods=['GET','POST'])
 def stopFinder(): # Stop Finder Search
     if request.method == 'POST': # If clicked search
         stops = getStop(request.form['searchBox']) # get dictionary of stops
         return render_template("stopFinderResults.html", searchTerm=request.form['searchBox'], stops=stops)
     return render_template('stopFinder.html')
 
-@app.route("/tripFinder", methods=['GET', 'POST'])
+@app.route(mainRoute + "/tripFinder", methods=['GET', 'POST'])
 def tripFinder():
     if request.method == 'POST':
         
@@ -29,13 +31,13 @@ def tripFinder():
         return render_template("tripResults.html", src=stopSrcName, dest=stopDestName, trips=trips)
     return render_template('trip.html')
 
-@app.route("/favourites", methods=['GET', 'POST'])
+@app.route(mainRoute + "/favourites", methods=['GET', 'POST'])
 def favourites():
     # if request.method == 'POST':
     
     return render_template("favourites.html")
 
-@app.route("/getStopID", methods=['POST'])
+@app.route(mainRoute + "/getStopID", methods=['POST'])
 def getStopID():
     name = str(request.get_data().decode('utf-8'))
     return getStopName(name)
